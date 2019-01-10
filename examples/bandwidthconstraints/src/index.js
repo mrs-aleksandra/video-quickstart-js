@@ -137,6 +137,8 @@ function setupBitrateGraph(kind, containerId, canvasId) {
       const timestamp = remoteTrackStats.timestamp;
       const bitrate = Math.round((bytesReceivedPrev - bytesReceived) * 8 / (timestampPrev - timestamp));
 
+      console.log("remoteTrackStats", remoteTrackStats.dimensions);
+
       bitrateSeries.addPoint(timestamp, bitrate);
       bitrateGraph.setDataSeries([bitrateSeries]);
       bitrateGraph.updateEndDate();

@@ -87,7 +87,7 @@ div.bitrategraph {
 }
 
 video#videopreview {
-  width: 160px;
+  width: 1024px;
   background-color: lightgrey !important;
   background-image: url('https://static0.twilio.com/marketing/bundles/archetype/img/logo-wordmark.svg');
   background-position: 50%;

@@ -54,8 +54,10 @@ $.getJSON('/token', function(data) {
 
     log("Joining room '" + roomName + "'...");
     var connectOptions = {
+      video: {width: 1024, height: 576},
+      preferredVideoCodecs: ["H264"],
       name: roomName,
-      logLevel: 'debug'
+      // logLevel: 'debug'
     };
 
     if (previewTracks) {
@@ -97,20 +99,24 @@ function roomJoined(room) {
     attachParticipantTracks(participant, previewContainer);
   });
 
+  // Stats
+  // const stats = await room.getStats();
+  // console.log(stats[0].remoteVideoTrackStats[0]);
+
   // When a Participant joins the Room, log the event.
   room.on('participantConnected', function(participant) {
     log("Joining: '" + participant.identity + "'");
   });
 
   // When a Participant adds a Track, attach it to the DOM.
-  room.on('trackAdded', function(track, participant) {
+  room.on('trackSubscribed', function(track, participant) {
     log(participant.identity + " added track: " + track.kind);
     var previewContainer = document.getElementById('remote-media');
     attachTracks([track], previewContainer);
   });
 
   // When a Participant removes a Track, detach it from the DOM.
-  room.on('trackRemoved', function(track, participant) {
+  room.on('trackUnsubscribed', function(track, participant) {
     log(participant.identity + " removed track: " + track.kind);
     detachTracks([track]);
   });

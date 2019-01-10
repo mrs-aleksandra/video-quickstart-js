@@ -14,6 +14,8 @@ function connectWithBandwidthConstraints(token, roomName, maxAudioBitrate, maxVi
   return Video.connect(token, {
     maxAudioBitrate: maxAudioBitrate,
     maxVideoBitrate: maxVideoBitrate,
+    video: {width: 1024, height: 576},
+    preferredVideoCodecs: ["H264"],
     name: roomName
   });
 }
